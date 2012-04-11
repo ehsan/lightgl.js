@@ -35,9 +35,9 @@ def compress_glsl(text):
     return text
 
 def build():
-    data = 'var %s = (function() {\n\n%s\nreturn %s;\n})();\n' +
-        'autoAddDeps(%s, "$GL");\n' +
-        'mergeInto(LibraryManager.library, %s);\n' +
+    data = ('var %s = (function() {\n\n%s\nreturn %s;\n})();\n' + \
+        'autoAddDeps(%s, "$GL");\n' + \
+        'mergeInto(LibraryManager.library, %s);\n') \
         % (module, compile(sources()), module, module, module)
     if 'release' in sys.argv:
         f1, temp1_path = tempfile.mkstemp()
