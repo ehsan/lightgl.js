@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-module = 'GL'
+module = 'GL_EMSCRIPTEN_HELPER'
 input_path = 'src/'
-output_path = 'lightgl.js'
+output_path = '../../src/library_lightgl.js'
 
 import re, os, sys, time, tempfile
 
@@ -35,7 +35,10 @@ def compress_glsl(text):
     return text
 
 def build():
-    data = 'var %s = (function() {\n\n%s\nreturn %s;\n})();\n' % (module, compile(sources()), module)
+    data = 'var %s = (function() {\n\n%s\nreturn %s;\n})();\n' +
+        'autoAddDeps(%s, "$GL");\n' +
+        'mergeInto(LibraryManager.library, %s);\n' +
+        % (module, compile(sources()), module, module, module)
     if 'release' in sys.argv:
         f1, temp1_path = tempfile.mkstemp()
         f2, temp2_path = tempfile.mkstemp()
