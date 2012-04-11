@@ -303,6 +303,22 @@ function addEventListeners() {
   on(gl.canvas, 'mouseup', mouseup);
   on(gl.canvas, 'mouseover', reset);
   on(gl.canvas, 'mouseout', reset);
+
+  on(document, 'keydown', function(e) {
+    if (!e.altKey && !e.ctrlKey && !e.metaKey) {
+      var key = mapKeyCode(e.keyCode);
+      if (key) GL.keys[key] = true;
+      GL.keys[e.keyCode] = true;
+    }
+  });
+
+  on(document, 'keyup', function(e) {
+    if (!e.altKey && !e.ctrlKey && !e.metaKey) {
+      var key = mapKeyCode(e.keyCode);
+      if (key) GL.keys[key] = false;
+      GL.keys[e.keyCode] = false;
+    }
+  });
 }
 
 // ### Automatic keyboard state
@@ -338,22 +354,6 @@ function on(element, name, callback) {
 function off(element, name, callback) {
   element.removeEventListener(name, callback);
 }
-
-on(document, 'keydown', function(e) {
-  if (!e.altKey && !e.ctrlKey && !e.metaKey) {
-    var key = mapKeyCode(e.keyCode);
-    if (key) GL.keys[key] = true;
-    GL.keys[e.keyCode] = true;
-  }
-});
-
-on(document, 'keyup', function(e) {
-  if (!e.altKey && !e.ctrlKey && !e.metaKey) {
-    var key = mapKeyCode(e.keyCode);
-    if (key) GL.keys[key] = false;
-    GL.keys[e.keyCode] = false;
-  }
-});
 
 function addOtherMethods() {
   // ### Multiple contexts
