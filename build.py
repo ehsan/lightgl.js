@@ -7,6 +7,11 @@ output_path = '../../src/library_lightgl.js'
 import re, os, sys, time, tempfile
 
 header = '''/*
+ * Warning: auto-generated file, do not edit!
+ * Submit your patches to https://github.com/ehsan/lightgl.js
+ */
+
+/*
  * lightgl.js
  * http://github.com/evanw/lightgl.js/
  *
